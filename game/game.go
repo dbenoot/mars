@@ -3,10 +3,11 @@ package game
 import (
 	"bufio"
 	"fmt"
+	"os"
+
 	"github.com/dbenoot/mars/astronaut"
 	"github.com/dbenoot/mars/ship"
 	"github.com/dbenoot/mars/util"
-	"os"
 )
 
 func NewGame() {
@@ -17,7 +18,7 @@ func NewGame() {
 
 	astronauts := []astronaut.Astronaut{a1, a2, a3}
 
-	s := ship.New("Mars Explorer", 5000, 5000, 250, 100)
+	s := ship.New("Mars Explorer", 5000, 5000, 250, 5000, 100)
 
 	fmt.Println(s)
 	fmt.Println(astronauts)

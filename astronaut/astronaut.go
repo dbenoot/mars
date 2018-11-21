@@ -2,7 +2,7 @@ package astronaut
 
 import (
 	"github.com/dbenoot/mars/ship"
-	"github.com/dbenoot/mars/util"
+	// "github.com/dbenoot/mars/util"
 )
 
 type Astronaut struct {
