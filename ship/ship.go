@@ -19,16 +19,22 @@ func (s Spaceship) Process() Spaceship {
 	return s
 }
 
-func (s Spaceship) Eat(f int) Spaceship {
-
+func (s Spaceship) Eat(f int) (Spaceship, bool) {
 	s.Food = s.Food - f
-
-	return s
+	if s.Food > 0 {
+		return s, true
+	} else {
+		s.Food = 0
+		return s, false
+	}
 }
 
-func (s Spaceship) Drink(f int) Spaceship {
-
+func (s Spaceship) Drink(f int) (Spaceship, bool) {
 	s.Water = s.Water - f
-
-	return s
+	if s.Water > 0 {
+		return s, true
+	} else {
+		s.Water = 0
+		return s, false
+	}
 }

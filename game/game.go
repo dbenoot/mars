@@ -12,13 +12,13 @@ import (
 
 func NewGame() {
 
-	a1 := astronaut.New("Jurgen", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100)
-	a2 := astronaut.New("Kerbal", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100)
-	a3 := astronaut.New("Buzz", 2, 2, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100)
+	a1 := astronaut.New("Jurgen", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, true, true)
+	a2 := astronaut.New("Kerbal", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, true, true)
+	a3 := astronaut.New("Buzz", 2, 2, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, true, true)
 
 	astronauts := []astronaut.Astronaut{a1, a2, a3}
 
-	s := ship.New("Mars Explorer", 5000, 5000, 250, 5000, 100)
+	s := ship.New("Mars Explorer", 5000, 10, 250, 5000, 100)
 
 	fmt.Println(s)
 	fmt.Println(astronauts)
