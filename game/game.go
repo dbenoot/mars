@@ -1,9 +1,9 @@
 package game
 
 import (
-	"bufio"
+	// "bufio"
 	"fmt"
-	"os"
+	// "os"
 
 	"github.com/dbenoot/mars/astronaut"
 	"github.com/dbenoot/mars/ship"
@@ -28,33 +28,59 @@ func NewGame() {
 }
 
 func StartGame(s ship.Spaceship, a []astronaut.Astronaut) {
-
-	days := util.GetRand(200, 250)
+	day := 0
+	days := util.GetRand(5, 10)
+	var input string
 
 	// Game loop
 
-	for day := 0; day < days; day++ {
+	for day < days {
 
 		fmt.Printf("You have %v days left in transit", days-day)
-
-		// s.Fuel = s.Fuel - 1
-		s = s.Process()
-
-		for i := len(a) - 1; i >= 0; i-- {
-			a[i], s = a[i].Process(s)
-
-			// Remove astronaut if health is <1
-			if a[i].Health < 1 {
-				a = append(a[:i], a[i+1:]...)
-			}
-
-		}
 
 		fmt.Println(s)
 		fmt.Println(a)
 
-		buf := bufio.NewReader(os.Stdin)
+		// get input
+
 		fmt.Print("> ")
-		_, _ = buf.ReadBytes('\n')
+
+		fmt.Scan(&input)
+
+		// process input
+
+		switch input {
+
+		// end the turn
+
+		case "end":
+
+			//process all ship actions
+			s = s.Process()
+
+			// loop over the astronauts and process all astronaut actions
+			for i := len(a) - 1; i >= 0; i-- {
+				a[i], s = a[i].Process(s)
+				// Remove astronaut if health is <1
+				if a[i].Health < 1 {
+					a = append(a[:i], a[i+1:]...)
+				}
+			}
+
+			// count up the day
+			day++
+
+			// check whether you have arrived and give stats
+
+			if day == days {
+				fmt.Println("You have arrived.")
+				fmt.Println(s)
+				fmt.Println(a)
+			}
+
+		default:
+			fmt.Println("Command not found.")
+		}
+
 	}
 }
