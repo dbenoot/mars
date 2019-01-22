@@ -12,22 +12,45 @@ import (
 
 func NewGame() {
 
-	a1 := astronaut.New("Jurgen", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, true, true)
-	a2 := astronaut.New("Kerbal", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, true, true)
-	a3 := astronaut.New("Buzz", 2, 2, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, true, true)
+	a1 := astronaut.New("Player", false, "Bridge", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, true, true)
+	a2 := astronaut.New("Kerbal", true, "Main Hall", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, true, true)
+	a3 := astronaut.New("Buzz", true, "Engineering", 2, 2, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, true, true)
 
 	astronauts := []astronaut.Astronaut{a1, a2, a3}
 
 	s := ship.New("Mars Explorer", 5000, 10, 250, 5000, 100)
 
+	var locationMap = map[string]*ship.Location{
+		"Bridge":      {"You are on the bridge of a spaceship.", []string{"Main Hall"}, []string{}},
+		"Main Hall":   {"This is the main hall. It connects to the bridge, the baracks and engineering.", []string{"Bridge", "Baracks", "Engineering"}, []string{}},
+		"Baracks":     {"You are in the baracks. Here the astronaut's sleeping berth are located.", []string{"Main Hall"}, []string{"relaxing"}},
+		"Engineering": {"You are in engineering where you see the engine, fuel and life support. You can access the lander from here as well.", []string{"Main Hall", "Lander"}, []string{}},
+		"Lander":      {"You are in the lander.", []string{"Engineering"}, []string{}},
+	}
+
 	fmt.Println(s)
 	fmt.Println(astronauts)
+
 	fmt.Println("Game Started!")
 
-	StartGame(s, astronauts)
+	StartGame(s, astronauts, locationMap)
 }
 
-func StartGame(s ship.Spaceship, a []astronaut.Astronaut) {
+func processLocation(lm map[string]*ship.Location, location string, astronauts []astronaut.Astronaut) {
+	fmt.Println("You are here: ", location, ".")
+	fmt.Println(lm[location].Description)
+	fmt.Println("You can go to these places:")
+	for index, loc := range lm[location].Transitions {
+		fmt.Printf("\t%d - %s\n", index+1, loc)
+	}
+	for _, a := range astronauts {
+		if location == a.Location && a.Name != astronauts[0].Name {
+			fmt.Println(a.Name, " is here.")
+		}
+	}
+}
+
+func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]*ship.Location) {
 	day := 0
 	days := util.GetRand(5, 10)
 	var input string
@@ -41,6 +64,8 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut) {
 		fmt.Println(s)
 		fmt.Println(a)
 
+		processLocation(lm, a[0].Location, a)
+
 		// get input
 
 		fmt.Print("> ")
@@ -50,6 +75,20 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut) {
 		// process input
 
 		switch input {
+
+		// walk to other rooms
+
+		case "1":
+			a[0].Location = lm[a[0].Location].Transitions[0]
+			processLocation(lm, a[0].Location, a)
+
+		case "2":
+			a[0].Location = lm[a[0].Location].Transitions[1]
+			processLocation(lm, a[0].Location, a)
+
+		case "3":
+			a[0].Location = lm[a[0].Location].Transitions[2]
+			processLocation(lm, a[0].Location, a)
 
 		// end the turn
 

@@ -9,6 +9,12 @@ type Spaceship struct {
 	Health int
 }
 
+type Location struct {
+	Description string
+	Transitions []string
+	Events      []string
+}
+
 func New(name string, water int, food int, fuel int, oxygen int, health int) Spaceship {
 	s := Spaceship{name, water, food, fuel, oxygen, health}
 	return s

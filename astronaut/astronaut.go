@@ -6,7 +6,9 @@ import (
 )
 
 type Astronaut struct {
-	name        string
+	Name        string
+	ai          bool
+	Location    string
 	water       int
 	food        int
 	pilot       int
@@ -18,8 +20,8 @@ type Astronaut struct {
 	drank       bool
 }
 
-func New(name string, water int, food int, pilot int, engineering int, maintenance int, social int, Health int, fed bool, drank bool) Astronaut {
-	a := Astronaut{name, water, food, pilot, engineering, maintenance, social, Health, fed, drank}
+func New(Name string, ai bool, Location string, water int, food int, pilot int, engineering int, maintenance int, social int, Health int, fed bool, drank bool) Astronaut {
+	a := Astronaut{Name, ai, Location, water, food, pilot, engineering, maintenance, social, Health, fed, drank}
 	return a
 }
 
