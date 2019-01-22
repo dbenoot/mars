@@ -1,7 +1,7 @@
 package ship
 
 type Spaceship struct {
-	name   string
+	Name   string
 	Water  int
 	Food   int
 	Fuel   int
@@ -12,7 +12,7 @@ type Spaceship struct {
 type Location struct {
 	Description string
 	Transitions []string
-	Events      []string
+	Subsystems  []string
 }
 
 func New(name string, water int, food int, fuel int, oxygen int, health int) Spaceship {
