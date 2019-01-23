@@ -68,7 +68,7 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 	fmt.Printf("You are on the spaceship %v on a %v days transit to Mars.\n", s.Name, days)
 
 	for day < days {
-
+		fmt.Printf("Day %v of transfer, %v days to go.\n", day, days-day)
 		processLocation(lm, a[0].Location, a)
 
 		// get input
