@@ -5,12 +5,12 @@
       "Transitions":[  
          "Main Hall"
       ],
-      "Subsystems":[  
-         "bed",
-         "bed",
-         "bed",
-         "light"
-      ]
+      "Subsystems":{  
+         "bed":100,
+         "bed":100,
+         "bed":100,
+         "light":100
+      }
    },
    "Bridge":{  
       "Name":"Bridge",
@@ -18,11 +18,11 @@
       "Transitions":[  
          "Main Hall"
       ],
-      "Subsystems":[
-          "navigation",
-          "communication",
-          "window"
-      ]
+      "Subsystems":{
+          "navigation":100,
+          "communication":100,
+          "window":100
+      }
    },
    "Engineering":{  
       "Name":"Engineering",
@@ -31,12 +31,12 @@
          "Main Hall",
          "Lander"
       ],
-      "Subsystems":[  
-          "engine",
-          "water reclamation",
-          "oxygen",
-          "carbon dioxide filter"
-      ]
+      "Subsystems":{  
+          "engine":100,
+          "water reclamation":100,
+          "oxygen":100,
+          "carbon dioxide filter":100
+      }
    },
    "Lander":{  
       "Name":"Lander",
@@ -44,12 +44,12 @@
       "Transitions":[  
          "Engineering"
       ],
-      "Subsystems":[
-          "engine",
-          "water reclamation",
-          "oxygen",
-          "carbon dioxide filter"
-      ]
+      "Subsystems":{
+          "engine":100,
+          "water reclamation":100,
+          "oxygen":100,
+          "carbon dioxide filter":100
+      }
    },
    "Main Hall":{  
       "Name":"Main Hall",
@@ -59,9 +59,9 @@
          "Barracks",
          "Engineering"
       ],
-      "Subsystems":[  
-          "food supplies",
-          "supplies"
-      ]
+      "Subsystems":{  
+          "food storage":100,
+          "supplies":100
+      }
    }
 }

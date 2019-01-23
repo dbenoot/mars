@@ -7,8 +7,9 @@ import (
 	"github.com/dbenoot/mars/astronaut"
 	"github.com/dbenoot/mars/ship"
 	"github.com/dbenoot/mars/util"
-	// "os"
 	"io/ioutil"
+	"os"
+	"text/tabwriter"
 )
 
 func NewGame() {
@@ -56,6 +57,16 @@ func loadLoc(f string) map[string]ship.Location {
 	return locationMap
 }
 
+func printSub(lm map[string]ship.Location, a astronaut.Astronaut) {
+	fmt.Println("The following subsystems are present in this module:")
+	w := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', tabwriter.AlignRight|tabwriter.Debug)
+	for k, v := range lm[a.Location].Subsystems {
+		fmt.Fprintf(w, "\t%v\t%v\t\n", k, v)
+	}
+	w.Flush()
+
+}
+
 func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Location) {
 	day := 0
 	days := util.GetRand(5, 10)
@@ -91,7 +102,10 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 		case "3":
 			a[0].Location = lm[a[0].Location].Transitions[2]
 
-		case "end":
+		case "sub":
+			printSub(lm, a[0])
+
+		case "sleep":
 			//this ends the turn (=day)
 
 			//process all ship actions

@@ -13,7 +13,7 @@ type Location struct {
 	Name        string
 	Description string
 	Transitions []string
-	Subsystems  []string
+	Subsystems  map[string]int
 }
 
 func New(name string, water int, food int, fuel int, oxygen int, health int) Spaceship {
