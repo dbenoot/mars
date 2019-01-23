@@ -2,12 +2,13 @@ package game
 
 import (
 	// "bufio"
+	"encoding/json"
 	"fmt"
-	// "os"
-
 	"github.com/dbenoot/mars/astronaut"
 	"github.com/dbenoot/mars/ship"
 	"github.com/dbenoot/mars/util"
+	// "os"
+	"io/ioutil"
 )
 
 func NewGame() {
@@ -20,20 +21,12 @@ func NewGame() {
 
 	s := ship.New("Mars Explorer", 5000, 10, 250, 5000, 100)
 
-	var locationMap = map[string]*ship.Location{
-		"Bridge":      {"You are on the bridge of a spaceship.", []string{"Main Hall"}, []string{}},
-		"Main Hall":   {"This is the main hall. It connects to the bridge, the barracks and engineering.", []string{"Bridge", "Barracks", "Engineering"}, []string{}},
-		"Barracks":    {"You are in the barracks. Here the astronaut's sleeping berth are located.", []string{"Main Hall"}, []string{"relaxing"}},
-		"Engineering": {"You are in engineering where you see the engine, fuel and life support. You can access the lander from here as well.", []string{"Main Hall", "Lander"}, []string{}},
-		"Lander":      {"You are in the lander.", []string{"Engineering"}, []string{}},
-	}
-
-	fmt.Println("Game Started!")
+	locationMap := loadLoc("rooms.json")
 
 	StartGame(s, astronauts, locationMap)
 }
 
-func processLocation(lm map[string]*ship.Location, location string, astronauts []astronaut.Astronaut) {
+func processLocation(lm map[string]ship.Location, location string, astronauts []astronaut.Astronaut) {
 	fmt.Println("You are here: ", location, ".")
 	fmt.Println(lm[location].Description)
 	fmt.Println("You can go to these places:")
@@ -51,10 +44,24 @@ func processInteraction(a astronaut.Astronaut) {
 	fmt.Println(a.Name, " is here.")
 }
 
-func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]*ship.Location) {
+func loadLoc(f string) map[string]ship.Location {
+	var locationMap map[string]ship.Location
+
+	a, err := ioutil.ReadFile(f)
+	util.Check(err)
+
+	err = json.Unmarshal(a, &locationMap)
+	util.Check(err)
+
+	return locationMap
+}
+
+func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Location) {
 	day := 0
 	days := util.GetRand(5, 10)
 	var input string
+
+	fmt.Println("Game Started!")
 
 	// Game loop
 

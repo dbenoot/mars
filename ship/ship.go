@@ -10,6 +10,7 @@ type Spaceship struct {
 }
 
 type Location struct {
+	Name        string
 	Description string
 	Transitions []string
 	Subsystems  []string
