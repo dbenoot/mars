@@ -1,1 +1,67 @@
-{"Barracks":{"Name":"Barracks","Description":"You are in the barracks. Here the astronaut's sleeping berth are located.","Transitions":["Main Hall"],"Subsystems":["relaxing"]},"Bridge":{"Name":"Bridge","Description":"You are on the bridge of a spaceship.","Transitions":["Main Hall"],"Subsystems":[]},"Engineering":{"Name":"Engineering","Description":"You are in engineering where you see the engine, fuel and life support. You can access the lander from here as well.","Transitions":["Main Hall","Lander"],"Subsystems":[]},"Lander":{"Name":"Lander","Description":"You are in the lander.","Transitions":["Engineering"],"Subsystems":[]},"Main Hall":{"Name":"Main Hall","Description":"This is the main hall. It connects to the bridge, the barracks and engineering.","Transitions":["Bridge","Barracks","Engineering"],"Subsystems":[]}}
+{  
+   "Barracks":{  
+      "Name":"Barracks",
+      "Description":"You are in the barracks. Here the astronaut's sleeping berths are located.",
+      "Transitions":[  
+         "Main Hall"
+      ],
+      "Subsystems":[  
+         "bed",
+         "bed",
+         "bed",
+         "light"
+      ]
+   },
+   "Bridge":{  
+      "Name":"Bridge",
+      "Description":"You are on the bridge of a spaceship.",
+      "Transitions":[  
+         "Main Hall"
+      ],
+      "Subsystems":[
+          "navigation",
+          "communication",
+          "window"
+      ]
+   },
+   "Engineering":{  
+      "Name":"Engineering",
+      "Description":"You are in engineering where you see the engine, fuel and life support. You can access the lander from here as well.",
+      "Transitions":[  
+         "Main Hall",
+         "Lander"
+      ],
+      "Subsystems":[  
+          "engine",
+          "water reclamation",
+          "oxygen",
+          "carbon dioxide filter"
+      ]
+   },
+   "Lander":{  
+      "Name":"Lander",
+      "Description":"You are in the lander.",
+      "Transitions":[  
+         "Engineering"
+      ],
+      "Subsystems":[
+          "engine",
+          "water reclamation",
+          "oxygen",
+          "carbon dioxide filter"
+      ]
+   },
+   "Main Hall":{  
+      "Name":"Main Hall",
+      "Description":"This is the main hall. It connects to the bridge, the barracks and engineering.",
+      "Transitions":[  
+         "Bridge",
+         "Barracks",
+         "Engineering"
+      ],
+      "Subsystems":[  
+          "food supplies",
+          "supplies"
+      ]
+   }
+}
