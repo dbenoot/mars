@@ -105,6 +105,9 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 		case "sub":
 			printSub(lm, a[0])
 
+		case "exit", "quit":
+			os.Exit(1)
+
 		case "sleep":
 			//this ends the turn (=day)
 
