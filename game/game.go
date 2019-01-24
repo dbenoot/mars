@@ -20,7 +20,7 @@ func NewGame() {
 
 	astronauts := []astronaut.Astronaut{a1, a2, a3}
 
-	s := ship.New("Mars Explorer", 5000, 10, 250, 5000, 100)
+	s := ship.New("Mars Explorer", 5000, 10, 250, 21, 500, 100)
 
 	locationMap := loadLoc("rooms.json")
 
@@ -69,14 +69,12 @@ func printSub(lm map[string]ship.Location, a astronaut.Astronaut) {
 
 func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Location) {
 	day := 0
-	days := util.GetRand(5, 10)
+	days := util.GetRand(220, 250)
 	var input string
 
-	fmt.Println("Game Started!")
+	fmt.Printf("Game Started!\nYou are on the spaceship %v on a %v days transit to Mars.\n", s.Name, days)
 
 	// Game loop
-
-	fmt.Printf("You are on the spaceship %v on a %v days transit to Mars.\n", s.Name, days)
 
 	for day < days {
 		fmt.Printf("Day %v of transfer, %v days to go.\n", day, days-day)
@@ -102,19 +100,24 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 		case "3":
 			a[0].Location = lm[a[0].Location].Transitions[2]
 
+		// overview of subsystems
+
 		case "sub":
 			printSub(lm, a[0])
+
+		// quit
 
 		case "exit", "quit":
 			os.Exit(1)
 
+		// end the turn
+
 		case "sleep":
-			//this ends the turn (=day)
 
 			//process all ship actions
 			s = s.Process()
 
-			// loop over the astronauts and process all astronaut actions
+			// loop over the astronauts and process all astronaut stats
 			for i := len(a) - 1; i >= 0; i-- {
 				a[i], s = a[i].Process(s)
 				// Remove astronaut if health is <1

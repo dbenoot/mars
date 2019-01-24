@@ -2,10 +2,11 @@ package ship
 
 type Spaceship struct {
 	Name   string
-	Water  int
-	Food   int
-	Fuel   int
-	Oxygen int
+	Water  int // in liters
+	Food   int // in kilograms
+	Fuel   int // in liters
+	Oxygen int // in %
+	CO2    int // in ppm
 	Health int
 }
 
@@ -16,8 +17,8 @@ type Location struct {
 	Subsystems  map[string]int
 }
 
-func New(name string, water int, food int, fuel int, oxygen int, health int) Spaceship {
-	s := Spaceship{name, water, food, fuel, oxygen, health}
+func New(name string, water int, food int, fuel int, oxygen int, co2 int, health int) Spaceship {
+	s := Spaceship{name, water, food, fuel, oxygen, co2, health}
 	return s
 }
 
