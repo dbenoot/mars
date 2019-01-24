@@ -3,6 +3,7 @@ package astronaut
 import (
 	"github.com/dbenoot/mars/ship"
 	// "github.com/dbenoot/mars/util"
+	"fmt"
 )
 
 type Astronaut struct {
@@ -16,11 +17,11 @@ type Astronaut struct {
 	maintenance int
 	social      int
 	Health      int
-	fed         bool
-	drank       bool
+	fed         int
+	drank       int
 }
 
-func New(Name string, npc bool, Location string, water int, food int, pilot int, engineering int, maintenance int, social int, Health int, fed bool, drank bool) Astronaut {
+func New(Name string, npc bool, Location string, water int, food int, pilot int, engineering int, maintenance int, social int, Health int, fed int, drank int) Astronaut {
 	a := Astronaut{Name, npc, Location, water, food, pilot, engineering, maintenance, social, Health, fed, drank}
 	return a
 }
@@ -28,23 +29,28 @@ func New(Name string, npc bool, Location string, water int, food int, pilot int,
 func (a Astronaut) Process(s ship.Spaceship) (Astronaut, ship.Spaceship) {
 
 	// eat
-	s, a.fed = s.Eat(a.food)
+	s, fed := s.Eat(a.food)
 
 	// drink
-	s, a.drank = s.Drink(a.water)
+	s, drank := s.Drink(a.water)
 
 	// calculate health
-	// for now we do fed +5 health and drank +5; not fed -1 and not drank -10
 
-	if a.fed == true {
-		a.Health = a.Health + 5
+	fmt.Println(fed)
+
+	if fed == true {
+		a.Health = a.Health + 1
+		a.fed = 0
 	} else {
-		a.Health = a.Health - 7
+		a.fed = a.fed + 1
+		a.Health = a.Health - a.fed
 	}
-	if a.drank == true {
-		a.Health = a.Health + 5
+	if drank == true {
+		a.Health = a.Health + 1
+		a.drank = 0
 	} else {
-		a.Health = a.Health - 7
+		a.drank = a.drank + 10
+		a.Health = a.Health - a.drank
 	}
 	if a.Health > 100 {
 		a.Health = 100

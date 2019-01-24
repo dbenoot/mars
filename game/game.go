@@ -14,9 +14,9 @@ import (
 
 func NewGame() {
 
-	a1 := astronaut.New("Player", false, "Bridge", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, true, true)
-	a2 := astronaut.New("Kerbal", true, "Main Hall", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, true, true)
-	a3 := astronaut.New("Buzz", true, "Engineering", 2, 2, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, true, true)
+	a1 := astronaut.New("Player", false, "Bridge", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, 0, 0)
+	a2 := astronaut.New("Kerbal", true, "Main Hall", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, 0, 0)
+	a3 := astronaut.New("Buzz", true, "Engineering", 2, 2, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 20, 1, 1)
 
 	astronauts := []astronaut.Astronaut{a1, a2, a3}
 
@@ -128,6 +128,8 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 	for day < days {
 		fmt.Printf("Day %v of transfer, %v days to go.\n", day, days-day)
 		processLocation(lm, a[0].Location, a)
+
+		fmt.Println(a)
 
 		// get input
 
