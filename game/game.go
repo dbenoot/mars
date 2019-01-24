@@ -172,11 +172,12 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 			// loop over the astronauts and process all astronaut stats
 			for i := len(a) - 1; i >= 0; i-- {
 				a[i], s = a[i].Process(s)
-				// Remove astronaut if health is <1
+				// Stop game if the commander dies
 				if a[i].Health < 1 && a[i].NPC == false {
 					fmt.Println("Alas, you died! Game over!") //alternatively, make another astronaut the captain?
 					os.Exit(1)
 				}
+				// Remove astronaut if health is <1
 				if a[i].Health < 1 {
 					fmt.Printf("Alas, astronaut %v has died!", a[i].Name)
 					a = append(a[:i], a[i+1:]...)
