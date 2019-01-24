@@ -67,6 +67,55 @@ func printSub(lm map[string]ship.Location, a astronaut.Astronaut) {
 
 }
 
+func printStat(s ship.Spaceship, a astronaut.Astronaut, lm map[string]ship.Location) {
+
+	if _, ok := lm[a.Location].Subsystems["status"]; ok {
+		fmt.Println("These are the ship's stats:")
+		w := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', tabwriter.AlignRight|tabwriter.Debug)
+
+		if lm[a.Location].Subsystems["status"]+util.GetRand(0, 100) > 100 {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "Name", s.Name, " ")
+		} else {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "Name", "unable to access status", " ")
+		}
+		if lm[a.Location].Subsystems["status"]+util.GetRand(0, 100) > 100 {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "Water", s.Water, "L")
+		} else {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "Water", "unable to access status", "L")
+		}
+		if lm[a.Location].Subsystems["status"]+util.GetRand(0, 100) > 100 {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "Food", s.Food, "kg")
+		} else {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "Food", "unable to access status", "kg")
+		}
+		if lm[a.Location].Subsystems["status"]+util.GetRand(0, 100) > 100 {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "Fuel", s.Fuel, "L")
+		} else {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "Fuel", "unable to access status", "L")
+		}
+		if lm[a.Location].Subsystems["status"]+util.GetRand(0, 100) > 100 {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "Oxygen", s.Oxygen, "%")
+		} else {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "Oxygen", "unable to access status", "%")
+		}
+		if lm[a.Location].Subsystems["status"]+util.GetRand(0, 100) > 100 {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "CO2", s.CO2, "ppm")
+		} else {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "CO2", "unable to access status", "ppm")
+		}
+		if lm[a.Location].Subsystems["status"]+util.GetRand(0, 100) > 100 {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "Health", s.Health, "❤")
+		} else {
+			fmt.Fprintf(w, "\t%v\t%v\t%v\t\n", "Health", "unable to access status", "❤")
+		}
+
+		w.Flush()
+	} else {
+		fmt.Println("Status equipement not present in this location.")
+	}
+
+}
+
 func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Location) {
 	day := 0
 	days := util.GetRand(220, 250)
@@ -105,6 +154,9 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 		case "sub":
 			printSub(lm, a[0])
 
+		case "stat":
+			printStat(s, a[0], lm)
+
 		// quit
 
 		case "exit", "quit":
@@ -115,7 +167,7 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 		case "sleep":
 
 			//process all ship actions
-			s = s.Process()
+			s = s.Process(lm, len(a))
 
 			// loop over the astronauts and process all astronaut stats
 			for i := len(a) - 1; i >= 0; i-- {

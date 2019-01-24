@@ -3,7 +3,8 @@
       "Name":"Barracks",
       "Description":"You are in the barracks. Here the astronaut's sleeping berths are located.",
       "Transitions":[  
-         "Main Hall"
+         "Main Hall",
+         "Medical Bay"
       ],
       "Subsystems":{  
          "bed":100,
@@ -16,12 +17,14 @@
       "Name":"Bridge",
       "Description":"You are on the bridge of a spaceship.",
       "Transitions":[  
-         "Main Hall"
+         "Main Hall",
+         "Medical Bay"
       ],
       "Subsystems":{
           "navigation":100,
           "communication":100,
-          "window":100
+          "window":100,
+          "status":100
       }
    },
    "Engineering":{  
@@ -35,7 +38,8 @@
           "engine":100,
           "water reclamation":100,
           "oxygen":100,
-          "carbon dioxide filter":100
+          "carbon dioxide filter":100,
+          "status":100
       }
    },
    "Lander":{  
@@ -62,6 +66,17 @@
       "Subsystems":{  
           "food storage":100,
           "supplies":100
+      }
+   },
+   "Medical Bay":{  
+      "Name":"Medical Bay",
+      "Description":"This is the medical bay.",
+      "Transitions":[  
+         "Bridge",
+         "Barracks"
+      ],
+      "Subsystems":{  
+          "autohealer":100
       }
    }
 }
