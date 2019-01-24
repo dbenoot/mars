@@ -130,7 +130,6 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 			day++
 
 			// check whether you have arrived and give stats
-
 			if day == days {
 				fmt.Println("You have arrived.")
 				fmt.Println(s)
