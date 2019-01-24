@@ -36,8 +36,6 @@ func (a Astronaut) Process(s ship.Spaceship) (Astronaut, ship.Spaceship) {
 
 	// calculate health
 
-	fmt.Println(fed)
-
 	if fed == true {
 		a.Health = a.Health + 1
 		a.fed = 0

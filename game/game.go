@@ -16,11 +16,11 @@ func NewGame() {
 
 	a1 := astronaut.New("Player", false, "Bridge", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, 0, 0)
 	a2 := astronaut.New("Kerbal", true, "Main Hall", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, 0, 0)
-	a3 := astronaut.New("Buzz", true, "Engineering", 2, 2, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 20, 1, 1)
+	a3 := astronaut.New("Buzz", true, "Engineering", 2, 2, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, 0, 0)
 
 	astronauts := []astronaut.Astronaut{a1, a2, a3}
 
-	s := ship.New("Mars Explorer", 5000, 10, 250, 21, 500, 100)
+	s := ship.New("Mars Explorer", 5000, 750, 250, 21, 500, 100)
 
 	locationMap := loadLoc("rooms.json")
 
@@ -129,8 +129,6 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 		fmt.Printf("Day %v of transfer, %v days to go.\n", day, days-day)
 		processLocation(lm, a[0].Location, a)
 
-		fmt.Println(a)
-
 		// get input
 
 		fmt.Print("> ")
@@ -176,6 +174,7 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 				a[i], s = a[i].Process(s)
 				// Remove astronaut if health is <1
 				if a[i].Health < 1 {
+					fmt.Printf("Alas, astronaut %v has died!", a[i].Name)
 					a = append(a[:i], a[i+1:]...)
 				}
 			}
