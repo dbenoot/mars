@@ -182,7 +182,7 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 
 		// end the turn
 
-		case "sleep":
+		case "end":
 
 			//process all ship actions
 			lm = removeSpecialism(lm)
