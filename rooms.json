@@ -11,6 +11,11 @@
          "bed":100,
          "bed":100,
          "light":100
+      },
+      "Specialist":{  
+         "Pilot":0,
+         "Engineering":0,
+         "Maintenance":0
       }
    },
    "Bridge":{  
@@ -25,6 +30,11 @@
           "communication":100,
           "window":100,
           "status":100
+      },
+      "Specialist":{  
+         "Pilot":0,
+         "Engineering":0,
+         "Maintenance":0
       }
    },
    "Engineering":{  
@@ -40,6 +50,11 @@
           "oxygen":100,
           "carbon dioxide filter":100,
           "status":100
+      },
+      "Specialist":{  
+         "Pilot":0,
+         "Engineering":0,
+         "Maintenance":0
       }
    },
    "Lander":{  
@@ -53,6 +68,11 @@
           "water reclamation":100,
           "oxygen":100,
           "carbon dioxide filter":100
+      },
+      "Specialist":{  
+         "Pilot":0,
+         "Engineering":0,
+         "Maintenance":0
       }
    },
    "Main Hall":{  
@@ -66,6 +86,11 @@
       "Subsystems":{  
           "food storage":100,
           "supplies":100
+      },
+      "Specialist":{  
+         "Pilot":0,
+         "Engineering":0,
+         "Maintenance":0
       }
    },
    "Medical Bay":{  
@@ -77,6 +102,11 @@
       ],
       "Subsystems":{  
           "autohealer":100
+      },
+      "Specialist":{  
+         "Pilot":0,
+         "Engineering":0,
+         "Maintenance":0
       }
    }
 }

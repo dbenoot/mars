@@ -3,7 +3,7 @@ package astronaut
 import (
 	"github.com/dbenoot/mars/ship"
 	// "github.com/dbenoot/mars/util"
-	"fmt"
+	// "fmt"
 )
 
 type Astronaut struct {
@@ -12,9 +12,9 @@ type Astronaut struct {
 	Location    string
 	water       int
 	food        int
-	pilot       int
-	engineering int
-	maintenance int
+	Pilot       int
+	Engineering int
+	Maintenance int
 	social      int
 	Health      int
 	fed         int

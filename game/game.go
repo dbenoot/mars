@@ -41,6 +41,24 @@ func processLocation(lm map[string]ship.Location, location string, astronauts []
 	}
 }
 
+func removeSpecialism(lm map[string]ship.Location) map[string]ship.Location {
+	for k, _ := range lm {
+		lm[k].Specialist["Pilot"] = 0
+		lm[k].Specialist["Engineering"] = 0
+		lm[k].Specialist["Maintenance"] = 0
+	}
+
+	return lm
+}
+
+func addSpecialism(lm map[string]ship.Location, a astronaut.Astronaut) map[string]ship.Location {
+	lm[a.Location].Specialist["Pilot"] = a.Pilot
+	lm[a.Location].Specialist["Engineering"] = a.Engineering
+	lm[a.Location].Specialist["Maintenance"] = a.Maintenance
+
+	return lm
+}
+
 func processInteraction(a astronaut.Astronaut) {
 	fmt.Println(a.Name, " is here.")
 }
@@ -167,10 +185,12 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 		case "sleep":
 
 			//process all ship actions
+			lm = removeSpecialism(lm)
 			s = s.Process(lm, len(a))
 
 			// loop over the astronauts and process all astronaut stats
 			for i := len(a) - 1; i >= 0; i-- {
+				lm = addSpecialism(lm, a[i])
 				a[i], s = a[i].Process(s)
 				// Stop game if the commander dies
 				if a[i].Health < 1 && a[i].NPC == false {
