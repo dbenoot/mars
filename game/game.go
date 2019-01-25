@@ -265,10 +265,10 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 
 		// overview of subsystems
 
-	case "sub", "subsystem", "subsystems":
+		case "sub", "subsystem", "subsystems":
 			printSub(lm, a[0])
 
-		case "location":
+		case "loc", "location":
 			for k, _ := range a {
 				fmt.Printf("Astronauts: %v - %v\n", a[k].Name, a[k].Location)
 			}
