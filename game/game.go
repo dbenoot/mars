@@ -265,7 +265,7 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 
 		// overview of subsystems
 
-		case "sub":
+	case "sub", "subsystem", "subsystems":
 			printSub(lm, a[0])
 
 		case "location":
@@ -276,7 +276,7 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 				fmt.Printf("Locations: %v - %v\n", value.Name, value.Occupied)
 			}
 
-		case "stat":
+		case "stat", "status":
 			printStat(s, a[0], lm)
 
 		case "talk":
@@ -287,21 +287,46 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 			}
 
 		case "assign":
+
+			// in the specific location, iterate over astronauts and check which NPC is present
+
 			for k, _ := range a {
 				if a[k].Location == a[0].Location && a[k].NPC == true {
+					// For the astronaut that is present, show all location where they can go
 					for loc, val := range lm {
 						if len(val.Occupied) < 1 {
 							fmt.Printf("\t- %s\n", loc)
 						}
 					}
 
+					//ask the player to which location the astronaut should be moved
+
 					var in string
 
-					fmt.Print("Assign %v to > ")
+					fmt.Printf("Assign %v to > ", a[k].Name)
 					fmt.Scan(&in)
 
+					// Check that the location exists and if it does, move the astronaut. Update both the location in a and the occupied in lm (this should be 1 table! TODO)
+
 					if val, ok := lm[in]; ok {
-						fmt.Printf("CHANGE ROOM CODE HERE %v\n", val.Name)
+						// clear old values
+						// lm[a[k].Location].Occupied = ""
+						// above does not work, hacky workaround necessary
+						var x = lm[a[k].Location]
+						x. Occupied = ""
+						lm[a[k].Location] = x
+						//also clear for the astronaut
+						a[k].Location = ""
+
+						// complete new location for the astronaut
+						a[k].Location = val.Name
+						// hacky workaround for lm, as the below does not work directly
+						// lm[a[k].Location].Occupied = a[k].Name
+						var y = lm[a[k].Location]
+						y.Occupied = a[k].Name
+						lm[a[k].Location] = y
+
+						fmt.Printf("Astronaut %v moved to location %v.\n", a[k].Name, a[k].Location)
 					} else {
 						fmt.Printf("Location %v does not exist.\n", in)
 					}
