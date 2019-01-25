@@ -1,10 +1,10 @@
 {  
-   "Airlock 1":{  
-      "Name":"Airlock 1",
+   "Airlock1":{  
+      "Name":"Airlock1",
       "Description":"",
       "Transitions":[  
          "Engineering",
-         "Outside in space"
+         "Space"
       ],
       "Subsystems":{  
          "airlock":100
@@ -16,12 +16,12 @@
          "Maintenance":0
       }
    },
-   "Airlock 2":{  
-      "Name":"Airlock 2",
+   "Airlock2":{  
+      "Name":"Airlock2",
       "Description":"",
       "Transitions":[  
          "Bridge",
-         "Outside in space"
+         "Space"
       ],
       "Subsystems":{  
          "airlock":100
@@ -37,8 +37,8 @@
       "Name":"Barracks",
       "Description":"You are in the barracks. Here the astronaut's sleeping berths are located.",
       "Transitions":[  
-         "Main Hall",
-         "Medical Bay"
+         "Hub",
+         "Clinic"
       ],
       "Subsystems":{  
          "bed":100,
@@ -57,9 +57,9 @@
       "Name":"Bridge",
       "Description":"You are on the bridge of a spaceship.",
       "Transitions":[  
-         "Main Hall",
-         "Medical Bay",
-         "Airlock 2"
+         "Hub",
+         "Clinic",
+         "Airlock2"
       ],
       "Subsystems":{
           "navigation":100,
@@ -78,9 +78,9 @@
       "Name":"Engineering",
       "Description":"You are in engineering where you see the engine, fuel and life support. You can access the lander from here as well.",
       "Transitions":[  
-         "Main Hall",
+         "Hub",
          "Lander",
-         "Airlock 1"
+         "Airlock1"
       ],
       "Subsystems":{  
           "engine":100,
@@ -115,9 +115,9 @@
          "Maintenance":0
       }
    },
-   "Main Hall":{  
-      "Name":"Main Hall",
-      "Description":"This is the main hall. It connects to the bridge, the barracks and engineering.",
+   "Hub":{  
+      "Name":"Hub",
+      "Description":"This is the Hub. It connects to the bridge, the barracks and engineering.",
       "Transitions":[  
          "Bridge",
          "Barracks",
@@ -134,9 +134,9 @@
          "Maintenance":0
       }
    },
-   "Medical Bay":{  
-      "Name":"Medical Bay",
-      "Description":"This is the medical bay.",
+   "Clinic":{  
+      "Name":"Clinic",
+      "Description":"This is the Clinic.",
       "Transitions":[  
          "Bridge",
          "Barracks"
@@ -151,12 +151,12 @@
          "Maintenance":0
       }
    },
-   "Outside in space":{  
-      "Name":"Outside in space",
+   "Space":{  
+      "Name":"Space",
       "Description":"You are in the vacuum of space outside of your ship. Here an astronaut can make extra efficient repairs to the engines, navigation, communication, window and airlocks. A specialist will also boost the efficiency of the engines at a higher level than in engineering. However, outside the ship, the astronaut has a higher chance on receiving unhealthy radiation doses.",
       "Transitions":[  
-         "Airlock 1",
-         "Airlock 2"
+         "Airlock1",
+         "Airlock2"
       ],
       "Subsystems":{
       },

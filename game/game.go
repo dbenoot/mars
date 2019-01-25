@@ -15,7 +15,7 @@ import (
 func NewGame() {
 
 	a1 := astronaut.New("Player", false, "Bridge", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, 0, 0)
-	a2 := astronaut.New("Kerbal", true, "Main Hall", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, 0, 0)
+	a2 := astronaut.New("Kerbal", true, "Hub", 2, 1, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, 0, 0)
 	a3 := astronaut.New("Buzz", true, "Engineering", 2, 2, util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), util.GetRand(0, 100), 100, 0, 0)
 
 	astronauts := []astronaut.Astronaut{a1, a2, a3}
@@ -302,6 +302,8 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 
 					if val, ok := lm[in]; ok {
 						fmt.Printf("CHANGE ROOM CODE HERE %v\n", val.Name)
+					} else {
+						fmt.Printf("Location %v does not exist.\n", in)
 					}
 
 				}
