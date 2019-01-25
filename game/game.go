@@ -294,8 +294,19 @@ func StartGame(s ship.Spaceship, a []astronaut.Astronaut, lm map[string]ship.Loc
 							fmt.Printf("\t- %s\n", loc)
 						}
 					}
+
+					var in string
+
+					fmt.Print("Assign %v to > ")
+					fmt.Scan(&in)
+
+					if val, ok := lm[in]; ok {
+						fmt.Printf("CHANGE ROOM CODE HERE %v\n", val.Name)
+					}
+
 				}
 			}
+
 		// save : doesn't work yet
 
 		case "save":
