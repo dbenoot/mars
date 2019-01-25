@@ -1,4 +1,38 @@
 {  
+   "Airlock 1":{  
+      "Name":"Airlock 1",
+      "Description":"",
+      "Transitions":[  
+         "Engineering",
+         "Outside in space"
+      ],
+      "Subsystems":{  
+         "airlock":100
+      },
+      "Occupied":"",
+      "Specialist":{  
+         "Pilot":0,
+         "Engineering":0,
+         "Maintenance":0
+      }
+   },
+   "Airlock 2":{  
+      "Name":"Airlock 2",
+      "Description":"",
+      "Transitions":[  
+         "Bridge",
+         "Outside in space"
+      ],
+      "Subsystems":{  
+         "airlock":100
+      },
+      "Occupied":"",
+      "Specialist":{  
+         "Pilot":0,
+         "Engineering":0,
+         "Maintenance":0
+      }
+   },
    "Barracks":{  
       "Name":"Barracks",
       "Description":"You are in the barracks. Here the astronaut's sleeping berths are located.",
@@ -12,6 +46,7 @@
          "bed":100,
          "light":100
       },
+      "Occupied":"",
       "Specialist":{  
          "Pilot":0,
          "Engineering":0,
@@ -23,7 +58,8 @@
       "Description":"You are on the bridge of a spaceship.",
       "Transitions":[  
          "Main Hall",
-         "Medical Bay"
+         "Medical Bay",
+         "Airlock 2"
       ],
       "Subsystems":{
           "navigation":100,
@@ -31,6 +67,7 @@
           "window":100,
           "status":100
       },
+      "Occupied":"",
       "Specialist":{  
          "Pilot":0,
          "Engineering":0,
@@ -42,7 +79,8 @@
       "Description":"You are in engineering where you see the engine, fuel and life support. You can access the lander from here as well.",
       "Transitions":[  
          "Main Hall",
-         "Lander"
+         "Lander",
+         "Airlock 1"
       ],
       "Subsystems":{  
           "engine":100,
@@ -51,6 +89,7 @@
           "carbon dioxide filter":100,
           "status":100
       },
+      "Occupied":"",
       "Specialist":{  
          "Pilot":0,
          "Engineering":0,
@@ -69,6 +108,7 @@
           "oxygen":100,
           "carbon dioxide filter":100
       },
+      "Occupied":"",
       "Specialist":{  
          "Pilot":0,
          "Engineering":0,
@@ -87,6 +127,7 @@
           "food storage":100,
           "supplies":100
       },
+      "Occupied":"",
       "Specialist":{  
          "Pilot":0,
          "Engineering":0,
@@ -103,7 +144,24 @@
       "Subsystems":{  
           "autohealer":100
       },
+      "Occupied":"",
       "Specialist":{  
+         "Pilot":0,
+         "Engineering":0,
+         "Maintenance":0
+      }
+   },
+   "Outside in space":{  
+      "Name":"Outside in space",
+      "Description":"You are in the vacuum of space outside of your ship. Here an astronaut can make extra efficient repairs to the engines, navigation, communication, window and airlocks. A specialist will also boost the efficiency of the engines at a higher level than in engineering. However, outside the ship, the astronaut has a higher chance on receiving unhealthy radiation doses.",
+      "Transitions":[  
+         "Airlock 1",
+         "Airlock 2"
+      ],
+      "Subsystems":{
+      },
+      "Occupied":"",
+      "Specialist":{
          "Pilot":0,
          "Engineering":0,
          "Maintenance":0

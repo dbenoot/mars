@@ -4,7 +4,7 @@ type Spaceship struct {
 	Name   string
 	Water  int     // in liters
 	Food   int     // in kilograms
-	Fuel   float64 // in liters
+	Fuel   float64 // in m³
 	Oxygen float64 // in %
 	CO2    int     // in ppm
 	Health int
@@ -15,6 +15,7 @@ type Location struct {
 	Description string
 	Transitions []string
 	Subsystems  map[string]int
+	Occupied    string
 	Specialist  map[string]int
 }
 
@@ -26,7 +27,7 @@ func New(name string, water int, food int, fuel float64, oxygen float64, co2 int
 func (s Spaceship) Process(lm map[string]Location, numastro int) Spaceship {
 
 	// fuel expenditure based on engine efficiency
-	s.Fuel = s.Fuel - ((100 / float64(lm["Engineering"].Subsystems["engine"]+1)) + 1*(float64(lm["Specialist"].Subsystems["Pilot"])/100))
+	s.Fuel = s.Fuel - (100 / float64(lm["Engineering"].Subsystems["engine"]+1)) + 1*(float64(lm["Bridge"].Specialist["Pilot"])/100) + 1*(float64(lm["Engineering"].Specialist["Engineering"])/100) + 1.3*(float64(lm["Outside in space"].Specialist["Engineering"])/100)
 
 	// oxygen expenditure based on #astronauts and oxygen reclamantion efficiency
 	s.Oxygen = s.Oxygen - float64(numastro)*0.5 + float64(lm["Engineering"].Subsystems["oxygen"])/100*1.5 + 1*float64(lm["Specialist"].Subsystems["Maintenance"])/100
@@ -40,6 +41,7 @@ func (s Spaceship) Process(lm map[string]Location, numastro int) Spaceship {
 	if s.CO2 < 0 {
 		s.CO2 = 0
 	}
+
 	return s
 }
 
